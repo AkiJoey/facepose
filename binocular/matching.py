@@ -4,12 +4,12 @@ import numpy as np
 def disparity_BM(img1, img2):
 
 	# 两个 trackbar 用来调节不同的参数查看效果
-    num = cv2.getTrackbarPos("num", "depth")
-    blockSize = cv2.getTrackbarPos("blockSize", "depth")
-    if blockSize % 2 == 0:
-        blockSize += 1
-    if blockSize < 5:
-        blockSize = 5
+	num = cv2.getTrackbarPos('num', 'depth')
+	blockSize = cv2.getTrackbarPos('blockSize', 'depth')
+	if blockSize % 2 == 0:
+		blockSize += 1
+	if blockSize < 5:
+		blockSize = 5
 
 	stereo = cv2.StereoBM_create(numDisparities = num * 16, blockSize = blockSize)
 	disparity = stereo.compute(img1, img2)
