@@ -10,8 +10,8 @@ def process(img1, img2):
     img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
     # 直方图均衡
-    img1 = cv2.equalizeHist(im1)
-    img2 = cv2.equalizeHist(im2)
+    img1 = cv2.equalizeHist(img1)
+    img2 = cv2.equalizeHist(img2)
 
     return img1, img2
 
@@ -27,8 +27,12 @@ def distance(img1, img2):
     img1, img2 = process(img1, img2)
 
     # 立体匹配, 获取视差图
-    disp = matching.disparity_BM(img1, img2)
+    disp = matching.disparity_SGBM(img1, img2)
     cv2.imshow('depth', disp)
     
     # 计算 3D 坐标, z 轴即为深度
     threeD = cv2.reprojectImageTo3D(disp, Q)
+    def callback(e, x, y, f, p):
+        if e == cv2.EVENT_LBUTTONDOWN:
+            print(threeD[y][x])
+    cv2.setMouseCallback('left', callback, None)

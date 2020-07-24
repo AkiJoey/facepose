@@ -22,18 +22,12 @@ def capture():
             print('read frame failed')
             continue
         size = frame.shape[::-1]
-        print(size)
 
 		# 左右图像切割
         img1 = frame[:, 0:640, :]
         img2 = frame[:, 640:1280, :]
 
         estimate.distance(img1, img2)
-
-        def callback(e, x, y, f, p):
-            if e == cv2.EVENT_LBUTTONDOWN:        
-                print(threeD[y][x])
-        cv2.setMouseCallback('depth', callback, None)
 
         if ret:
 
