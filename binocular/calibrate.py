@@ -9,7 +9,7 @@ def calibrate(width, height, img_list, size):
 	# 棋盘格角点的参数 最大循环次数为 30 最大误差容限为 0.001
 	criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 	
-	# 世界坐标系中的棋盘格角点 (二维矩阵)
+	# 世界坐标系中的棋盘格角点
 	objp = np.zeros((width * height, 3), np.float32)
 	objp[:, :2] = np.mgrid[0:width, 0:height].T.reshape(-1, 2)
 
@@ -43,15 +43,14 @@ def calibrate(width, height, img_list, size):
 
 	return obj_points, img_points, mtx, dist
 
-	
 if __name__ == '__main__':
 
 	# image size
 	size = (640, 480)
 
 	# monocular calibration
-	obj_points, img_points1, mtx1, dist1 = calibrate(7, 7, glob('./assets/img1/*.jpg'), size)
 	obj_points, img_points2, mtx2, dist2 = calibrate(7, 7, glob('./assets/img2/*.jpg'), size)
+	obj_points, img_points1, mtx1, dist1 = calibrate(7, 7, glob('./assets/img1/*.jpg'), size)
 
 	# binocular calibration
 	ret, mtx1, dist1, mtx2, dist2, rvecs, tvecs, E, F = cv2.stereoCalibrate(

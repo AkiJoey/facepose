@@ -16,10 +16,10 @@ def disparity_BM(img1, img2):
 	stereo = cv2.StereoBM_create(numDisparities = 0, blockSize = 5)
 	disparity = stereo.compute(img1, img2)
 
-	# disp = cv2.normalize(
-    #     disparity, disparity, alpha = 0, beta = 255, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_8U
-    # )
-	disp = np.divide(disparity.astype(np.float32), 16.)
+	disp = cv2.normalize(
+        disparity, disparity, alpha = 0, beta = 255, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_8U
+    )
+	disp = np.divide(disp.astype(np.float32), 16.)
 
 	return disp
 

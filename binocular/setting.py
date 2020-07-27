@@ -3,7 +3,7 @@ import yaml
 import numpy as np
 
 # get config path
-root_path = os.getcwd() + '\\'
+root_path = os.getcwd() + '/'
 config_path = root_path + 'config.yml'
 
 def read():
