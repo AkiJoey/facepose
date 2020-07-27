@@ -18,6 +18,8 @@ def pose(img):
 
     # read config
     mtx, dist = setting.read()
+    if mtx.all() is None:
+        return
 
     # face points detect
     obj_points, img_points = landmark.detect(process(img))
